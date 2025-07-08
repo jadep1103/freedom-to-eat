@@ -1,6 +1,7 @@
-from typing import Dict 
-from models.entry import FoodEntry
-# Random first fake database for testing 
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session 
 
-#clé = id (string), valeur = FoodEntry
-food_db: Dict[str, FoodEntry] = {}
+# Create a SQLAlchemy engine -> connect to PostgreSQL database 
+DATABASE_URL = "postgresql+psycopg2://jadepillercammal@localhost:5432/food_entries"
+engine = create_engine(DATABASE_URL)
+

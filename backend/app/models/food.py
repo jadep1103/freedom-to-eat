@@ -1,6 +1,8 @@
 from .base import Base 
-from sqlalchemy.types import Column, Integer, String, Float, Boolean, DateTime, Uuid, Enum
+from sqlalchemy import Column, Integer, String, Float, Boolean, DateTime, Enum
 from enum import Enum as EnumPy
+from sqlalchemy.dialects.postgresql import UUID as Uuid
+from sqlalchemy.dialects.postgresql import ARRAY # For multi-select fields
 from sqlalchemy.types import Enum as EnumSQLAlchemy
 from uuid import uuid4
 
@@ -53,7 +55,7 @@ class FoodEntry(Base):
     stresslevel = Column(Integer, nullable = True)
     satisfactionlevel = Column(Integer, nullable = True)
     energylevel = Column(Integer, nullable = True)
-    emotions = Column(EnumSQLAlchemy(EmotionsEnum), nullable = True)
+    emotions = Column(ARRAY(EnumSQLAlchemy(EmotionsEnum)), nullable = True)
     atemindfully = Column(Boolean, nullable = True)
     fooddetails = Column(String, nullable = True) 
     notes = Column(String, nullable = True) 

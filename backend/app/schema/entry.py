@@ -2,7 +2,7 @@ from pydantic import BaseModel,conint,constr,Field,HttpUrl
 from datetime import datetime 
 from typing import Optional,List 
 from enum import Enum
-from uuid import uuid4
+from uuid import uuid4, UUID
 
 # Creating Enum classes for each multi-select 
 
@@ -44,27 +44,10 @@ class Emotions(str, Enum):
 class SleepEnv(str, Enum):
     home = "Home"
     hotel = "Hotel"
-    someone_elses_home = "Someone else's home"
+    someone_elses_home = "Another home"
     outside = "Outside"
 
 
-
-class FoodEntry(BaseModel): 
-    id :str = Field(default_factory=lambda: str(uuid4()))  
-    timestamp: datetime 
-    location : Optional[List[Location]] = None
-    company : Optional[List[Company]] = None
-    mealtype : Optional[List[MealType]] = None
-    hungerlevel : Optional[conint(ge=1, le=10)] = None  
-    fullnesslevel : Optional[conint(ge=1, le=10)] = None  
-    stresslevel : Optional[conint(ge=1, le=10)] = None  
-    satisfactionlevel : Optional[conint(ge=1, le=10)] = None
-    energylevel : Optional[conint(ge=1, le=10)] = None
-    emotions : Optional[List[Emotions]]= None
-    atemindfully : Optional[bool] = None  
-    fooddetails : Optional[constr(min_length=1, max_length=800)] = None  
-    notes : Optional[constr(min_length=1, max_length=1000)] = None    
-    foodimage : Optional[HttpUrl] = None  # URL or path to food image
 
 class FoodEntryCreate(BaseModel): 
     timestamp: datetime 
@@ -82,6 +65,10 @@ class FoodEntryCreate(BaseModel):
     notes : Optional[constr(min_length=1, max_length=1000)] = None    
     foodimage : Optional[HttpUrl] = None  # URL or path to food image
 
+    class Config: 
+        orm_mode = True  # Enable ORM mode for compatibility with SQLAlchemy models
+        from_attributes = True  # Allow attributes to be read from SQLAlchemy models
+
 class FoodEntryUpdate(BaseModel): 
     timestamp: Optional[datetime] = None 
     location : Optional[List[Location]] = None
@@ -97,6 +84,30 @@ class FoodEntryUpdate(BaseModel):
     fooddetails : Optional[constr(min_length=1, max_length=800)] = None  
     notes : Optional[constr(min_length=1, max_length=1000)] = None    
     foodimage : Optional[HttpUrl] = None  # URL or path to food image
+    class Config: 
+        orm_mode = True  # Enable ORM mode for compatibility with SQLAlchemy models
+        from_attributes = True  # Allow attributes to be read from SQLAlchemy models
+
+
+class FoodEntryRead(BaseModel):
+    id: UUID
+    timestamp: datetime
+    location: Optional[List[Location]] = None
+    company: Optional[List[Company]] = None
+    mealtype: Optional[List[MealType]] = None
+    hungerlevel: Optional[conint(ge=1, le=10)] = None
+    fullnesslevel: Optional[conint(ge=1, le=10)] = None
+    stresslevel: Optional[conint(ge=1, le=10)] = None
+    satisfactionlevel: Optional[conint(ge=1, le=10)] = None
+    energylevel: Optional[conint(ge=1, le=10)] = None
+    emotions: Optional[List[Emotions]] = None
+    atemindfully: Optional[bool] = None
+    fooddetails: Optional[constr(min_length=1, max_length=800)] = None
+    notes: Optional[constr(min_length=1, max_length=1000)] = None
+    foodimage: Optional[HttpUrl] = None
+    class Config: 
+        orm_mode = True  # Enable ORM mode for compatibility with SQLAlchemy models
+        from_attributes = True  # Allow attributes to be read from SQLAlchemy models
 
 
 class ExerciseEntry(BaseModel): 

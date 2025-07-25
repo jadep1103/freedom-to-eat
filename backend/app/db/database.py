@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 DATABASE_URL = "postgresql+psycopg2://jadepillercammal@localhost:5432/food_entries"
 engine = create_engine(DATABASE_URL)
 
-Session = sessionmaker(bind=engine, autoflash=False, autocommit=False, expire_on_commit=False)
+Session = sessionmaker(engine)
 
 def get_db():
     db = Session()

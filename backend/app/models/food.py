@@ -1,9 +1,10 @@
 from .base import Base 
-from sqlalchemy import Column, Integer, String, Float, Boolean, DateTime, Enum
+from sqlalchemy import Column, Integer, String, Float, Boolean, DateTime, Enum, UUID, ForeignKey
 from enum import Enum as EnumPy
 from sqlalchemy.dialects.postgresql import UUID as Uuid
 from sqlalchemy.dialects.postgresql import ARRAY # For multi-select fields
 from sqlalchemy.types import Enum as EnumSQLAlchemy
+from sqlalchemy.orm import relationship
 from uuid import uuid4
 
 # Creating Enum classes for each multi-select 
@@ -60,3 +61,5 @@ class FoodEntry(Base):
     fooddetails = Column(String, nullable = True) 
     notes = Column(String, nullable = True) 
     foodimage = Column(String, nullable = True)  # Store image path or URL -> Pydantic handles the validation of the image URL or path
+    user_id = Column(UUID(as_uuid=True), ForeignKey("user.id"))
+    owner = relationship("User", back_populates="entries")

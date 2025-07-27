@@ -22,15 +22,17 @@ def signup(user : UserCreate, db : Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
 
-    return {"message" : "User created successfully, user_id : {new_user.id}"}
+    return {"message" : f"User created successfully, user_id : {new_user.id}"}
 
 #Login
 @router.post("/login")
 def login(user : UserLogin, db : Session = Depends(get_db)): 
     # Check if account exists 
     db_user = db.query(User).filter(User.email == user.email).first()
+    if not db_user: 
+        raise HTTPException(status_code = 401, detail = "Invalid email or password")
     correct_password = verify_password(user.password, db_user.hashed_password)
-    if not db_user or not correct_password: 
+    if not correct_password: 
         raise HTTPException(status_code = 401, detail = "Invalid email or password")
     
     token = generate_access_token({"sub": db_user.email})#Generate access token

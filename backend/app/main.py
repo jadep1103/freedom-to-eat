@@ -8,4 +8,4 @@ async def root():
     return {"message" : "Welcome to the Freedom to Eat API!"}
 
 app.include_router(food.router)
-app.include_router(auth_routes.rooter)
+app.include_router(auth_routes.router)

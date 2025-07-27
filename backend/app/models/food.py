@@ -62,4 +62,4 @@ class FoodEntry(Base):
     notes = Column(String, nullable = True) 
     foodimage = Column(String, nullable = True)  # Store image path or URL -> Pydantic handles the validation of the image URL or path
     user_id = Column(UUID(as_uuid=True), ForeignKey("user.id"))
-    owner = relationship("User", back_populates="entries")
+    user = relationship("User", back_populates="entries")

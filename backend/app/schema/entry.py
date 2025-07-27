@@ -51,9 +51,9 @@ class SleepEnv(str, Enum):
 
 class FoodEntryCreate(BaseModel): 
     timestamp: datetime 
-    location : Optional[List[Location]] = None
-    company : Optional[List[Company]] = None
-    mealtype : Optional[List[MealType]] = None
+    location : Optional[Location] = None
+    company : Optional[Company] = None
+    mealtype : Optional[MealType] = None
     hungerlevel : Optional[conint(ge=1, le=10)] = None  
     fullnesslevel : Optional[conint(ge=1, le=10)] = None  
     stresslevel : Optional[conint(ge=1, le=10)] = None  
@@ -71,9 +71,9 @@ class FoodEntryCreate(BaseModel):
 
 class FoodEntryUpdate(BaseModel): 
     timestamp: Optional[datetime] = None 
-    location : Optional[List[Location]] = None
-    company : Optional[List[Company]] = None
-    mealtype : Optional[List[MealType]] = None
+    location : Optional[Location] = None
+    company : Optional[Company] = None
+    mealtype : Optional[MealType] = None
     hungerlevel : Optional[conint(ge=1, le=10)] = None  
     fullnesslevel : Optional[conint(ge=1, le=10)] = None  
     stresslevel : Optional[conint(ge=1, le=10)] = None  
@@ -92,9 +92,9 @@ class FoodEntryUpdate(BaseModel):
 class FoodEntryRead(BaseModel):
     id: UUID
     timestamp: datetime
-    location: Optional[List[Location]] = None
-    company: Optional[List[Company]] = None
-    mealtype: Optional[List[MealType]] = None
+    location : Optional[Location] = None
+    company : Optional[Company] = None
+    mealtype : Optional[MealType] = None
     hungerlevel: Optional[conint(ge=1, le=10)] = None
     fullnesslevel: Optional[conint(ge=1, le=10)] = None
     stresslevel: Optional[conint(ge=1, le=10)] = None

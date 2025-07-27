@@ -22,7 +22,7 @@ def read_entry(entry_id: str, db: Session = Depends(get_db)):
     """
     Retrieve a food entry by its ID.
     """
-    entry = food_crud.get_food_entry(entry_id)
+    entry = food_crud.get_food_entry(db, entry_id)
     if not entry:
         raise HTTPException(status_code=404, detail="Entry not found")
     return entry
@@ -41,7 +41,7 @@ def update_entry(entry_id: str, updated_entry: FoodEntryUpdate, db: Session = De
     """
     Update a food entry by its ID.
     """
-    entry = food_crud.update_food_entry(entry_id, updated_entry, db)
+    entry = food_crud.update_food_entry(db,entry_id, updated_entry)
     if not entry: 
         raise HTTPException(status_code=404, detail="Entry not found")
     return entry
@@ -49,7 +49,7 @@ def update_entry(entry_id: str, updated_entry: FoodEntryUpdate, db: Session = De
 # Delete a food entry
 @router.delete("/{entry_id}", summary = "Delete a food entry")
 def delete_entry(entry_id: str, db: Session = Depends(get_db)):
-    deleted = food_crud.delete_food_entry(entry_id,db)
+    deleted = food_crud.delete_food_entry(db,entry_id)
     if not deleted:
         raise HTTPException(status_code=404, details="Entry not found")
     return {"message": "Entry deleted successfully"}

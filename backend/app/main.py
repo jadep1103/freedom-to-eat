@@ -1,5 +1,7 @@
 from fastapi import FastAPI
-from routers import food, auth_routes
+from routers import food, auth_routes, upload
+from services.image_storage import save_image_locally
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(
     title="Freedom to Eat API",
@@ -19,3 +21,5 @@ async def root():
 
 app.include_router(food.router)
 app.include_router(auth_routes.router)
+app.include_router(upload.router)
+app.mount("/images", StaticFiles(directory="uploaded_images"), name="images")

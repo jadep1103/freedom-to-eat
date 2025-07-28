@@ -35,5 +35,7 @@ def login(user : UserLogin, db : Session = Depends(get_db)):
     if not correct_password: 
         raise HTTPException(status_code = 401, detail = "Invalid email or password")
     
-    token = generate_access_token({"sub": db_user.email})#Generate access token
+    #token = generate_access_token({"sub": db_user.email}) #Generate access token
+    print("JWT sub:", db_user.id)
+    token = generate_access_token({"sub": str(db_user.id)})
     return {"access_token" : token, "token_type" : "bearer"}

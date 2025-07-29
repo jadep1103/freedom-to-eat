@@ -1,7 +1,7 @@
 # routers/upload.py
 from fastapi import APIRouter, UploadFile, File, Depends, HTTPException
-from services.image_storage import save_image_locally
 from utils.auth import get_current_user
+from services.image_storage import save_image_locally
 from models.user import User
 
 

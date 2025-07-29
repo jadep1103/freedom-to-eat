@@ -1,4 +1,4 @@
-from pydantic import BaseModel,conint,constr,Field,HttpUrl
+from pydantic import BaseModel,conint,constr,Field
 from datetime import datetime 
 from typing import Optional,List 
 from enum import Enum
@@ -63,7 +63,7 @@ class FoodEntryCreate(BaseModel):
     atemindfully : Optional[bool] = None  
     fooddetails : Optional[constr(min_length=1, max_length=800)] = None  
     notes : Optional[constr(min_length=1, max_length=1000)] = None    
-    image_url : Optional[HttpUrl] = None  # URL or path to food image
+    foodimage : Optional[str] = None  # URL or path to food image
 
     class Config: 
         orm_mode = True  # Enable ORM mode for compatibility with SQLAlchemy models
@@ -83,7 +83,7 @@ class FoodEntryUpdate(BaseModel):
     atemindfully : Optional[bool] = None  
     fooddetails : Optional[constr(min_length=1, max_length=800)] = None  
     notes : Optional[constr(min_length=1, max_length=1000)] = None    
-    image_url : Optional[HttpUrl] = None  # URL or path to food image
+    foodimage : Optional[str] = None  # URL or path to food image
     class Config: 
         orm_mode = True  # Enable ORM mode for compatibility with SQLAlchemy models
         from_attributes = True  # Allow attributes to be read from SQLAlchemy models
@@ -104,7 +104,7 @@ class FoodEntryRead(BaseModel):
     atemindfully: Optional[bool] = None
     fooddetails: Optional[constr(min_length=1, max_length=800)] = None
     notes: Optional[constr(min_length=1, max_length=1000)] = None
-    image_url: Optional[HttpUrl] = None
+    foodimage: Optional[str] = None
     class Config: 
         orm_mode = True  # Enable ORM mode for compatibility with SQLAlchemy models
         from_attributes = True  # Allow attributes to be read from SQLAlchemy models

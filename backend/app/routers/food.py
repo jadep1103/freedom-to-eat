@@ -15,7 +15,7 @@ def create_entry(entry: FoodEntryCreate, db: Session = Depends(get_db), user: Us
     """
     Create a new food entry.
     """
-    new_entry = FoodEntryCreate(**entry.dict())
+    new_entry = FoodEntryCreate(**entry.dict())  #COPIE INUTILE ???
     return food_crud.create_food_entry(db, new_entry, user.id)
 
 # Read a food entry by ID 

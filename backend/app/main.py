@@ -22,4 +22,3 @@ async def root():
 app.include_router(food.router)
 app.include_router(auth_routes.router)
 app.include_router(upload.router)
-app.mount("/images", StaticFiles(directory="uploaded_images"), name="images")

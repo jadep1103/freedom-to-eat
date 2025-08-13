@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const login = async (email: string, password: string) => {
-    const response = await fetch("http://localhost:8000/auth/login", {
+    const response = await fetch("http://127.0.0.1:8000/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const signup = async (username: string, email: string, password: string) => {
-    const response = await fetch("http://localhost:8000/auth/signup", {
+    const response = await fetch("http://127.0.0.1:8000/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

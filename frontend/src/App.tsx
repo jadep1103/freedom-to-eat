@@ -8,14 +8,12 @@ function App() {
 
 return (
 
-  <Router>
     <Routes>
       <Route path="/" element={<LandingPage/>}></Route> 
       <Route path="/login" element={<Login/>}></Route> 
       <Route path="signup" element={<SignUp/>}></Route>
       <Route path="home" element={<Home/>}></Route>
     </Routes>
-  </Router>
 
 );
 
